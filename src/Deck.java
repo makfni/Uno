@@ -2,14 +2,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck{
-    private ArrayList<Card> deck;
-    private ArrayList<Card> field;
 
+    private ArrayList<Card> deck;
     private char[] colour = new char[]{'B', 'G', 'R', 'Y'};
     private int[] rank = new int[]{0,1,2,3,4,5,6,7,8,9};
     private String[] ability = new String[]{"Skip turn", "Reverse", "Draw two"};
     private String[] abilityX = new String[]{"Change colour", "Draw four"};
-
+    Uno uno;
     //Create deck
     public ArrayList<Card> initDeck(){
 
@@ -59,7 +58,7 @@ public class Deck{
         Card card;
         if(deckSize() > 0){
             card = deck.get(deckSize() - 1);
-            field.add(card);
+            uno.getField().add(card);
             deck.remove(card);
             return card;
         }

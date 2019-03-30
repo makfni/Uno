@@ -49,4 +49,16 @@ public class Card {
     public String getAbility(){
         return this.ability;
     }
+
+    public void printNorm(){
+        System.out.println(colour + rank);
+    }
+
+    public void printSpec(){
+        System.out.println(colour + ability);
+    }
+
+    public void printSpecX(){
+        System.out.println(ability);
+    }
 }

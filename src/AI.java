@@ -8,7 +8,7 @@ public class AI extends Deck{
     }
 
     //Calls dealHand() from Deck and populates player hand
-    public ArrayList<Card> getHand(Deck deck){
+    public ArrayList<Card> initAIHand(Deck deck){
         AIHand.addAll(deck.dealHand());
         return AIHand;
     }
@@ -16,10 +16,12 @@ public class AI extends Deck{
     public ArrayList<Card> getAIHand() {
         return AIHand;
     }
-
     public void setAIHand(ArrayList<Card> AIHand) {
         this.AIHand = AIHand;
     }
 
+    public int handSize(ArrayList<Card> hand){
+        return AIHand.size();
+    }
 
 }
