@@ -9,6 +9,7 @@ public class Deck{
     private String[] ability = new String[]{"Skip turn", "Reverse", "Draw two"};
     private String[] abilityX = new String[]{"Change colour", "Draw four"};
     Uno uno;
+
     //Create deck
     public ArrayList<Card> initDeck(){
 

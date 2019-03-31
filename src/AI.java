@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
-public class AI extends Deck{
+public class AI extends Deck implements Player{
     private ArrayList<Card> AIHand = new ArrayList<>();
+    private ArrayList<AI> bots = new ArrayList<>();
 
-    public AI(ArrayList<Card> AIHand, boolean status) {
+    public AI() {
         this.AIHand = AIHand;
     }
 
@@ -16,6 +17,9 @@ public class AI extends Deck{
     public ArrayList<Card> getAIHand() {
         return AIHand;
     }
+
+    public ArrayList<AI> getBots(){ return bots; }
+
     public void setAIHand(ArrayList<Card> AIHand) {
         this.AIHand = AIHand;
     }
@@ -23,5 +27,6 @@ public class AI extends Deck{
     public int handSize(ArrayList<Card> hand){
         return AIHand.size();
     }
+
 
 }

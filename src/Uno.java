@@ -1,11 +1,34 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Uno{
 //All game logic will reside in this class
-    private playerOne p1;
-    private AI bot;
-    private Deck deck;
-    private ArrayList<Card> field;
+    private playerOne p1 = new playerOne();
+    private AI bot = new AI();
+    private Deck deck = new Deck();
+    private ArrayList<Card> field = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
+
+    public void mainMenu(){
+        System.out.println("Bienvenido a mi juego de Uno!\n"
+                + "Choose one of the options.\n"
+                + "1 - New Game\n"
+                + "2 - Exit");
+
+        int opt = scanner.nextInt();
+
+        switch(opt){
+            case 1:
+                startGame();
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid input.");
+                mainMenu();
+        }
+    }
+
     //startGame function to initialize game
     public void startGame(){
 
@@ -15,7 +38,7 @@ public class Uno{
 
         //If hands are populated, nobody has won
         while((p1.handSize(p1.getPlayerOneHand()) > 0) && (bot.handSize(bot.getAIHand()) > 0)){
-
+            
         }
     }
 
@@ -28,7 +51,7 @@ public class Uno{
     //else, call reuse pile function
 
     public void playerOneTurn(){
-        System.out.println();
+
     }
 
     //check for empty deck (if it is then reuse pile)
