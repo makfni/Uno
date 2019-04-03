@@ -1,17 +1,11 @@
 import java.util.ArrayList;
 
-public class AI extends Deck implements Player{
+public class AI extends Deck{
     private ArrayList<Card> AIHand = new ArrayList<>();
     private ArrayList<AI> bots = new ArrayList<>();
 
     public AI() {
         this.AIHand = AIHand;
-    }
-
-    //Calls dealHand() from Deck and populates player hand
-    public ArrayList<Card> initAIHand(Deck deck){
-        AIHand.addAll(deck.dealHand());
-        return AIHand;
     }
 
     public ArrayList<Card> getAIHand() {
@@ -27,6 +21,5 @@ public class AI extends Deck implements Player{
     public int handSize(ArrayList<Card> hand){
         return AIHand.size();
     }
-
 
 }

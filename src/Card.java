@@ -1,29 +1,31 @@
 public class Card {
 
-    char colour;
-    int rank;
-    String ability;
-    Boolean special;
+    private char colour;
+    private int rank;
+    private Boolean special;
+    private String ability;
+    private String abilityX;
 
-    public Card(char colour, int rank){
-      //  this.special = special;
+    public Card(Boolean special, char colour, int rank){
+        this.special = special;
         this.colour = colour;
         this.rank = rank;
+        this.special = false;
 
     }
 
-    public Card(Boolean Special, char colour, String ability){
+
+    public Card(Boolean special, char colour, String ability){
         this.special = special;
         this.colour = colour;
         this.ability = ability;
-        special = true;
+
     }
 
-    public Card(Boolean Special, String ability){
+    public Card(Boolean special, String abilityX){
         this.special = special;
         this.special = special;
-        this.ability = ability;
-        special = true;
+        this.abilityX = abilityX;
     }
 
     public void setColour(char colour) {
@@ -31,7 +33,7 @@ public class Card {
     }
 
     public char getColour(){
-        return this.colour;
+        return colour;
     }
 
     public void setRank(int rank) {
@@ -43,11 +45,11 @@ public class Card {
     }
 
     public int getRank(){
-        return this.rank;
+        return rank;
     }
 
     public String getAbility(){
-        return this.ability;
+        return ability;
     }
 
     public void printNorm(){
@@ -61,4 +63,18 @@ public class Card {
     public void printSpecX(){
         System.out.println(ability);
     }
+
+    public void showCard(){
+        System.out.print(this.rank);
+    }
+
+    public void showSpecialCard(){
+        System.out.print(this.colour + " " + this.ability + " | ");
+    }
+
+    public void showSpecialX(){
+        System.out.print(this.abilityX + " | ");
+    }
+
+
 }

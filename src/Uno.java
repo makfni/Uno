@@ -1,58 +1,49 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Uno{
-//All game logic will reside in this class
+public class Uno {
+    //All game logic will reside in this class
     private playerOne p1 = new playerOne();
     private AI bot = new AI();
     private Deck deck = new Deck();
     private ArrayList<Card> field = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    public void mainMenu(){
+    public void mainMenu() {
         System.out.println("Bienvenido a mi juego de Uno!\n"
                 + "Choose one of the options.\n"
                 + "1 - New Game\n"
                 + "2 - Exit");
 
+        deck.dealHands(p1.getPlayerOneHand());
+        deck.dealHands(bot.getAIHand());
+
+
         int opt = scanner.nextInt();
-
-        switch(opt){
+        switch (opt) {
             case 1:
+                deck.displayHand(p1.getPlayerOneHand());
                 startGame();
-                break;
-            case 2:
-                break;
             default:
-                System.out.println("Invalid input.");
-                mainMenu();
+                break;
         }
     }
 
-    //startGame function to initialize game
-    public void startGame(){
 
-        //hands are created
-        p1.initHand(deck);
-        bot.initAIHand(deck);
-
-        //If hands are populated, nobody has won
-        while((p1.handSize(p1.getPlayerOneHand()) > 0) && (bot.handSize(bot.getAIHand()) > 0)){
-            
-        }
+    //    //startGame function to initialize game
+    public void startGame() {
+        p1.playerTurn();
     }
+}
 
-    //make each player play their turn
-    //player goes first and plays game on console
-    //AI will play by having their hand looped through to check for playable cards
-    //if they receive an ability card, they will play it right away
-    //check if deck is empty (if it's not, then next player goes)
-    //if no play can be made, draw card from deck if deck is not empty
-    //else, call reuse pile function
-
-    public void playerOneTurn(){
-
-    }
+//
+//    //make each player play their turn
+//    //player goes first and plays game on console
+//    //AI will play by having their hand looped through to check for playable cards
+//    //if they receive an ability card, they will play it right away
+//    //check if deck is empty (if it's not, then next player goes)
+//    //if no play can be made, draw card from deck if deck is not empty
+//    //else, call reuse pile function
 
     //check for empty deck (if it is then reuse pile)
 
@@ -60,7 +51,5 @@ public class Uno{
 
     //check for winner function
 
-    public ArrayList<Card> getField(){
-        return this.field;
-    }
-}
+
+

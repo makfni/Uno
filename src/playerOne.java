@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class playerOne extends Uno implements Player{
+public class playerOne{
 
     private ArrayList<Card> playerOneHand;
 
@@ -8,28 +8,25 @@ public class playerOne extends Uno implements Player{
         this.playerOneHand = new ArrayList<>();
     }
 
-    //Calls dealHand() from Deck and populates player hand
-    public ArrayList<Card> initHand(Deck deck){
-        playerOneHand.addAll(deck.dealHand());
+    public ArrayList<Card> getPlayerOneHand() {
+
         return playerOneHand;
     }
 
-    public ArrayList<Card> getPlayerOneHand() {
-        return playerOneHand;
+    public void playerTurn(){
+
+        System.out.println("Play your cards(s): ");
+
+
     }
 
     public void setPlayerOneHand(ArrayList<Card> playerOneHand) {
+
         this.playerOneHand = playerOneHand;
     }
+
     public int handSize(ArrayList<Card> hand){
+
         return playerOneHand.size();
     }
-
-    public void displayHand(){
-        System.out.println("Your current hand: ");
-        for(Card c : playerOneHand){
-            c.printNorm();
-        }
-    }
-
 }
