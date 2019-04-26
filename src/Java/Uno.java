@@ -1,41 +1,49 @@
 package Java;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Uno {
-    //All game logic will reside in this class
+public class Uno implements PlayerInterface{
+
     private playerOne p1 = new playerOne();
     private AI bot = new AI();
     private Deck deck = new Deck();
     private ArrayList<Card> field = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
+    private Boolean winner = false;
+    Player player1 = new Player(p1.getPlayerOneHand());
+    Player player2 = new Player(bot.getAIHand());
+    private ArrayList<Player> playerList = new ArrayList<>();
 
-    public void mainMenu() {
-        System.out.println("Bienvenido a mi juego de Java.Uno!\n"
-                + "Choose one of the options.\n"
-                + "1 - New Game\n"
-                + "2 - Exit");
+    //startGame function to initialize game
+    public void startGame() {
 
         deck.dealHands(p1.getPlayerOneHand());
         deck.dealHands(bot.getAIHand());
 
+        for(int i = 0; i < 2; i++){
+            playerList.add(i,playerList.get(i));
+        }
 
-        int opt = scanner.nextInt();
-        switch (opt) {
-            case 1:
-                deck.displayHand(p1.getPlayerOneHand());
-                startGame();
-            default:
-                break;
+        while(!winner){
+            playerTurn(field, playerList);
+        }
+    }
+
+    public void playerTurn(ArrayList<Card> field, ArrayList<Player> playerList){
+        System.out.println("Which cards would you like to play? ");
+        System.out.println("====================================");
+        String input = scanner.nextLine();
+        input = input.replaceAll("\\{", "").replaceAll("\\}", "");
+        String[] stringArray = input.split(", ");
+
+        for(String s: stringArray){
+            //left off here
         }
     }
 
 
-    //    //startGame function to initialize game
-    public void startGame() {
-        p1.playerTurn();
-    }
 }
 
 //

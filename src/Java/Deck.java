@@ -73,11 +73,11 @@ public class Deck{
         System.out.println("Your current hand: ");
         System.out.print("{");
         for(int i = 0; i < hand.size(); i++){
-            if(hand.get(i).getSpecial() == false && hand.get(i).getSpecialX() == false) {
+            if(!hand.get(i).getSpecial() && !hand.get(i).getSpecialX()) {
                 hand.get(i).showCard();
-            }else if(hand.get(i).getSpecial() == true && hand.get(i).getSpecialX() == false) {
+            }else if(hand.get(i).getSpecial() && !hand.get(i).getSpecialX()) {
                 hand.get(i).showSpecialCard();
-            }else if(hand.get(i).getSpecialX() == true && hand.get(i).getSpecial() == false){
+            }else if(hand.get(i).getSpecialX() && !hand.get(i).getSpecial()){
                 hand.get(i).showSpecialX();
             }
             System.out.print(" ");

@@ -15,13 +15,6 @@ public class playerOne{
         return playerOneHand;
     }
 
-    public void playerTurn(){
-
-        System.out.println("Play your cards(s): ");
-
-
-    }
-
     public void setPlayerOneHand(ArrayList<Card> playerOneHand) {
 
         this.playerOneHand = playerOneHand;
