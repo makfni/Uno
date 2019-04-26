@@ -1,3 +1,5 @@
+package Java;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class Uno {
     private Scanner scanner = new Scanner(System.in);
 
     public void mainMenu() {
-        System.out.println("Bienvenido a mi juego de Uno!\n"
+        System.out.println("Bienvenido a mi juego de Java.Uno!\n"
                 + "Choose one of the options.\n"
                 + "1 - New Game\n"
                 + "2 - Exit");
@@ -39,7 +41,7 @@ public class Uno {
 //
 //    //make each player play their turn
 //    //player goes first and plays game on console
-//    //AI will play by having their hand looped through to check for playable cards
+//    //Java.AI will play by having their hand looped through to check for playable cards
 //    //if they receive an ability card, they will play it right away
 //    //check if deck is empty (if it's not, then next player goes)
 //    //if no play can be made, draw card from deck if deck is not empty
