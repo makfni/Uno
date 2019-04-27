@@ -12,8 +12,6 @@ public class Uno implements PlayerInterface{
     private ArrayList<Card> field = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
     private Boolean winner = false;
-    Player player1 = new Player(p1.getPlayerOneHand());
-    Player player2 = new Player(bot.getAIHand());
     private ArrayList<Player> playerList = new ArrayList<>();
 
     //startGame function to initialize game
@@ -22,7 +20,7 @@ public class Uno implements PlayerInterface{
         deck.dealHands(p1.getPlayerOneHand());
         deck.dealHands(bot.getAIHand());
 
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < playerList.size(); i++){
             playerList.add(i,playerList.get(i));
         }
 
@@ -32,6 +30,8 @@ public class Uno implements PlayerInterface{
     }
 
     public void playerTurn(ArrayList<Card> field, ArrayList<Player> playerList){
+
+        deck.displayHand(p1.getPlayerOneHand());
         System.out.println("Which cards would you like to play? ");
         System.out.println("====================================");
         String input = scanner.nextLine();
@@ -39,7 +39,7 @@ public class Uno implements PlayerInterface{
         String[] stringArray = input.split(", ");
 
         for(String s: stringArray){
-            //left off here
+            //String
         }
     }
 

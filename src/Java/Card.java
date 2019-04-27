@@ -30,36 +30,6 @@ public class Card {
         this.abilityX = abilityX;
     }
 
-    public void setColour(char colour) {
-        this.colour = colour;
-    }
-
-    public char getColour(){
-        return colour;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public void setAbility(String ability) {
-        this.ability = ability;
-    }
-
-    public void setSpecial(Boolean special){
-        this.special = special;
-    }
-
-    public int getRank(){
-        return rank;
-    }
-
-    public String getAbility(){
-        return ability;
-    }
-
-    public String getAbilityX(){return abilityX;}
-
     public Boolean getSpecial(){
         return special;
     }
