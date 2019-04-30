@@ -30,14 +30,22 @@ public class Card {
         this.abilityX = abilityX;
     }
 
-    public Boolean getSpecial(){
+    public char getColour(){ return colour;}
+
+    public int getRank() { return rank;}
+
+    public Boolean isSpecial(){
         return special;
     }
 
-    public Boolean getSpecialX(){return specialX;}
+    public Boolean isSpecialX(){ return specialX;}
+
+    public String getAbility(){ return ability;}
+
+    public String getAbilityX(){ return abilityX;}
 
     public void showCard(){
-        System.out.print("[" + this.colour + "|" + this.rank + "] ");
+        System.out.print("[" + this.colour + this.rank + "] ");
     }
 
     public void showSpecialCard(){
