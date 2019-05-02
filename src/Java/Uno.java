@@ -11,6 +11,7 @@ public class Uno implements PlayerInterface{
     private ArrayList<Card> table = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
     private Scanner move = new Scanner(System.in);
+    private Scanner choice = new Scanner(System.in);
     private Scanner scanner = new Scanner(System.in);
     private Boolean winner = false;
 
@@ -38,41 +39,69 @@ public class Uno implements PlayerInterface{
         int turn = move.nextInt();
         switch (turn) {
             case 1:
-                String temp = "";
-                System.out.println("Which cards would you like to play? ");
-                System.out.println("====================================");
-                String input = scanner.nextLine();
-                input = input.replaceAll("\\[", "").replaceAll("\\]", "");
-                String[] stringArray = input.split(", ");
 
-                System.out.println(stringArray[0]);
+                System.out.println("Would you like to play a normal or special card?");
+                String play = choice.nextLine();
+                play.toLowerCase();
 
-                for (String s : stringArray) {
-                    for(int i = 0; i < p1.getPlayerOneHand().size(); i++) {
-                        if (stringArray[0].equals(p1.getPlayerOneHand().get(i).getAbilityX())) {
-                            table.add(p1.getPlayerOneHand().get(i));
-                            p1.getPlayerOneHand().remove(i);
-                        } else if (p1.getPlayerOneHand().get(i).getColour() == s.charAt(0) && p1.getPlayerOneHand().get(i).getAbility().equals(s.substring(2))) {
-                            table.add(p1.getPlayerOneHand().get(i));
-                            p1.getPlayerOneHand().remove(i);
+                switch (play){
+                    case "normal":
+
+                        System.out.println("Which cards would you like to play? ");
+                        System.out.println("====================================");
+                        String input = scanner.nextLine();
+                        input = input.replaceAll("\\[", "").replaceAll("\\]", "");
+                        String[] stringArray = input.split(", ");
+
+                        for(String s: stringArray) {
+                            char color = s.charAt(0);
+                            int value = Integer.parseInt(s.replaceAll("[\\D]", ""));
+                            for(Card c : p1.getPlayerOneHand()) {
+                                if(c.getColour() == color && c.getRank() == value) {
+                                    table.add(c);
+                                    p1.getPlayerOneHand().remove(c);
+                                    break;
+                                }
+                            }
                         }
-                    }
-                }
-//                for(String s : stringArray){
-//                    char colour = s.charAt(0);
-//                    int rank = Integer.parseInt(s.replaceAll("[\\D]", ""));
-//                    for(Card c : p1.getPlayerOneHand()){
-//                        if(c.getColour() == colour && c.getRank() == rank){
-//                            table.add(c);
-//                            p1.getPlayerOneHand().remove(c);
-//                            break;
-//                        }
-//                    }
-//                }
 
-                deck.display(table,"table");
-                playerTurn(table, playerList);
-                break;
+                        deck.display(table,"table");
+                        playerTurn(table, playerList);
+                        break;
+
+                    case "special":
+
+                        System.out.println("Which cards would you like to play? ");
+                        System.out.println("====================================");
+
+                        String inputX = scanner.nextLine();
+                        input = inputX.replaceAll("\\[", "").replaceAll("\\]", "");
+                        String[] stringArrayX = input.split(", ");
+                        System.out.println(stringArrayX[0]);
+
+                        for (String s : stringArrayX) {
+                            for (Card c : p1.getPlayerOneHand()) {
+                                if (stringArrayX[0].equals(c.getAbilityX())) {
+                                    table.add(c);
+                                    p1.getPlayerOneHand().remove(c);
+                                    break;
+                                } else if (c.getColour() == s.charAt(0) && c.getAbility().equals(s.substring(2))) {
+                                    table.add(c);
+                                    p1.getPlayerOneHand().remove(c);
+                                    break;
+                                }
+                            }
+                        }
+
+                        deck.display(table,"table");
+                        playerTurn(table, playerList);
+                        break;
+
+                    default:
+                        break;
+                }
+                   break;
+
 
             case 2:
                 p1.getPlayerOneHand().add(deck.draw());
