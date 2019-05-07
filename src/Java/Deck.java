@@ -1,6 +1,7 @@
 package Java;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Deck{
@@ -17,25 +18,18 @@ public class Deck{
     public Deck(){
 
         deck = new ArrayList<>();
-        for(int x = 0; x < 2; x++) {
-            for (int c = 0; c < colour.length; c++) {
-                for (int r = 0; r < rank.length; r++) {
-                    for (int j = 0; j < abilities.length; j++) {
-                        Card card = new Card(true, false, colour[c], abilities[j]);
-                        deck.add(card);
-                        Card cardX = new Card(false, false, colour[c], rank[r]);
-                        deck.add(cardX);
-                    }
-                }
+
+        for(int i = 0; i < 2; i++) {
+            for (char c : colour)
+                Arrays.stream(rank).mapToObj(r -> new Card(false, false, c, r)).forEach(cardX -> deck.add(cardX));
+            for (char c : colour)
+                Arrays.stream(abilities).map(a -> new Card(true, false, c, a)).forEach(card -> deck.add(card));
+
+            for (int x = 0; x < 2; x++) {
+                Arrays.stream(abilityX).map(s -> new Card(false, true, s)).forEach(card -> deck.add(card));
             }
         }
 
-        for(int x = 0; x < 4; x++) {
-            for (int i = 0; i < abilityX.length; i++) {
-                Card card = new Card(false,true, abilityX[i]);
-                deck.add(card);
-            }
-        }
         Collections.shuffle(deck);
     }
 

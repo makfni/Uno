@@ -1,12 +1,16 @@
 package Java;
 
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
-public class Launcher{
+public class Launcher extends Uno{
 
-    public static void main(String args[]){
+    public static void main(String[] args) throws Exception{
 
         Uno uno = new Uno();
+        Method u = Uno.class.getDeclaredMethod("startGame");
+        u.setAccessible(true);
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenido a mi juego de Uno!\n"
                 + "Choose one of the options.\n"
@@ -16,7 +20,7 @@ public class Launcher{
         int opt = scanner.nextInt();
         switch (opt) {
             case 1:
-                uno.startGame();
+                u.invoke(uno);
                 break;
             case 2:
                 System.out.println("Hasta la proxima!");
