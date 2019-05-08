@@ -21,12 +21,22 @@ public class Deck{
 
         for(int i = 0; i < 2; i++) {
             for (char c : colour)
-                Arrays.stream(rank).mapToObj(r -> new Card(false, false, c, r)).forEach(cardX -> deck.add(cardX));
-            for (char c : colour)
-                Arrays.stream(abilities).map(a -> new Card(true, false, c, a)).forEach(card -> deck.add(card));
+                for(int r : rank){
+                    Card card = new Card(false,false,c,r);
+                    deck.add(card);
+                }
 
-            for (int x = 0; x < 2; x++) {
-                Arrays.stream(abilityX).map(s -> new Card(false, true, s)).forEach(card -> deck.add(card));
+            for (char c : colour)
+                for(String ability : abilities){
+                    Card card  = new Card(true,false,c, ability);
+                    deck.add(card);
+                }
+
+            for (int x = 0; x < 1; x++) {
+                for(String abilityX : abilityX){
+                    Card card = new Card(false,true,abilityX);
+                    deck.add(card);
+                }
             }
         }
 

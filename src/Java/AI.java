@@ -8,7 +8,7 @@ public class AI extends Deck{
     private Deck deck = new Deck();
 
 
-    public void playerTurn(ArrayList<Card> table, ArrayList<Player> playerList) {
+    public void playerTurn(ArrayList<Card> table, ArrayList<ArrayList<Card>> playerList) {
         deck.display(AIHand, "AI");
         System.exit(0);
     }

@@ -44,6 +44,8 @@ public class Card {
 
     public String getAbilityX(){ return abilityX;}
 
+    public void setColour(char colour){this.colour = colour;}
+
     public void showCard(){
         System.out.print("[" + this.colour + this.rank + "] ");
     }
