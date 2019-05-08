@@ -1,18 +1,15 @@
 package Java;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Deck{
 
     private ArrayList<Card> deck;
-    private char[] colour = {'B', 'G', 'R', 'Y'};
+    private char[] colour = {'B', 'Y', 'R', 'G'};
     private int[] rank = {0,1,2,3,4,5,6,7,8,9};
     private String[] abilities = {"Skip turn", "Reverse", "Draw two"};
     private String[] abilityX = {"Change colour", "Draw four"};
-
-
 
     //Create deck
     public Deck(){
@@ -119,6 +116,7 @@ public class Deck{
         return abilityX;
     }
 
+    public ArrayList<Card> getDeck() { return deck;}
 
     public char[] getColour() {
         return colour;

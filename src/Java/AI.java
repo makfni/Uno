@@ -17,8 +17,6 @@ public class AI extends Deck{
         return AIHand;
     }
 
-    public ArrayList<AI> getBots(){ return bots; }
-
     public int handSize(ArrayList<Card> hand){
         return AIHand.size();
     }

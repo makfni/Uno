@@ -15,11 +15,6 @@ public class playerOne{
         return playerOneHand;
     }
 
-    public void setPlayerOneHand(ArrayList<Card> playerOneHand) {
-
-        this.playerOneHand = playerOneHand;
-    }
-
     public int handSize(ArrayList<Card> hand){
 
         return playerOneHand.size();

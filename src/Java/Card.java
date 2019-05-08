@@ -10,6 +10,7 @@ public class Card {
     private String abilityX;
 
     public Card(Boolean special, Boolean specialX, char colour, int rank){
+
         this.special = special;
         this.specialX = specialX;
         this.colour = colour;
@@ -18,6 +19,7 @@ public class Card {
 
 
     public Card(Boolean special, Boolean specialX, char colour, String ability){
+
         this.special = special;
         this.colour = colour;
         this.ability = ability;
@@ -25,6 +27,7 @@ public class Card {
     }
 
     public Card(Boolean special, Boolean specialX, String abilityX){
+
         this.special = special;
         this.specialX = specialX;
         this.abilityX = abilityX;

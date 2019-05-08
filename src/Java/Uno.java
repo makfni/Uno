@@ -1,5 +1,6 @@
 package Java;
 
+import java.io.IOError;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,27 +15,43 @@ public class Uno extends Deck implements PlayerInterface{
     private Scanner choice = new Scanner(System.in);
     private Scanner scanner = new Scanner(System.in);
     private Scanner colourChange = new Scanner(System.in);
-    private Boolean winner = false;
+    public Boolean special;
+    public Boolean specialX;
 
     //startGame function to initialize game
     private void startGame() {
 
         deck.dealHands(p1.getPlayerOneHand());
         deck.dealHands(bot.getAIHand());
-        table.add(deck.draw());
+
+        //First card drawn on the table cannot be an ability(X) card
+        for (int i = 1; i < getDeckNum(); i++) {
+            special =  !getDeck().get(getDeckNum() - i - 1).isSpecial();
+            specialX = !getDeck().get(getDeckNum() - i - 1).isSpecialX();
+            if (draw().isSpecialX() || draw().isSpecial()) {
+                if (special && specialX) {
+                    table.add(getDeck().get(getDeckNum() - i - 1));
+                    getDeck().remove(getDeck().get(getDeckNum() - i - 1));
+                    break;
+                }
+            }
+        }
+
 
         //p1 is at index 0
         playerList.add(p1.getPlayerOneHand());
         //bot is at index 1
         playerList.add(bot.getAIHand());
 
-        while(!winner){
-            playerTurn(table, playerList);
-        }
+        playerTurn(table, playerList);
+
     }
 
     public void playerTurn(ArrayList<Card> table, ArrayList<ArrayList<Card>> playerList){
         for(ArrayList<Card> playerL : playerList ){
+            if(checkWinner(p1.getPlayerOneHand())){
+                System.exit(0);
+            }
             System.out.println("Deck size: " + deck.getDeckNum());
             deck.display(table,"table");
             deck.display(p1.getPlayerOneHand(), "hand");
@@ -56,7 +73,7 @@ public class Uno extends Deck implements PlayerInterface{
                             System.out.println("Which cards would you like to play? ");
                             System.out.println("====================================");
                             String input = scanner.nextLine();
-                            input = input.replaceAll("\\[", "").replaceAll("\\]", "");
+                           // input = input.replaceAll("\\[", "").replaceAll("\\]", "");
                             String[] stringArray = input.split(", ");
 
                             System.out.println(stringArray[0]);
@@ -77,7 +94,6 @@ public class Uno extends Deck implements PlayerInterface{
                                 }
                             }
 
-
                             playerTurn(table, playerList);
                             break;
 
@@ -87,8 +103,8 @@ public class Uno extends Deck implements PlayerInterface{
                             System.out.println("====================================");
 
                             String inputX = scanner.nextLine();
-                            input = inputX.replaceAll("\\[", "").replaceAll("\\]", "");
-                            String[] stringArrayX = input.split(", ");
+                           // input = inputX.replaceAll("\\[", "").replaceAll("\\]", "");
+                            String[] stringArrayX = inputX.split(", ");
 
                             System.out.println(stringArrayX[0]);
 
@@ -115,14 +131,11 @@ public class Uno extends Deck implements PlayerInterface{
                                     }
                                 }
                             }
-
-
                             playerTurn(table, playerList);
                             break;
 
                         default:
                             break;
-
                     }
                     break;
 
@@ -188,16 +201,24 @@ public class Uno extends Deck implements PlayerInterface{
     }
 
 
-    public Boolean checkValidity(ArrayList<Card> table, Card card, String play){
+    public Boolean checkValidity(ArrayList<Card> table, Card card, String play) {
 
-        char tableColour = table.get(table.size()-1).getColour();
-        int tableRank = table.get(table.size()-1).getRank();
-        String ability = table.get(table.size()-1).getAbility();
+        char tableColour = table.get(table.size() - 1).getColour();
+        int tableRank = table.get(table.size() - 1).getRank();
+        String ability = table.get(table.size() - 1).getAbility();
 
-        if(play.equals("normal")){
+        if (play.equals("normal")) {
             return card.getColour() == tableColour || card.getRank() == tableRank;
-        }else if(play.equals("special")){
+        } else if (play.equals("special")) {
             return card.getColour() == tableColour || card.getAbility().equals(ability);
+        }
+        return false;
+    }
+
+    public Boolean checkWinner(ArrayList<Card> hand){
+        if(hand.isEmpty()) {
+            System.out.println("You win!");
+            return true;
         }
         return false;
     }
