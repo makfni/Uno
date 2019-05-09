@@ -6,8 +6,8 @@ public class Card {
     private int rank;
     private Boolean special;
     private Boolean specialX;
-    private String ability;
-    private String abilityX;
+    private String actionCard;
+    private String wildCard;
 
     public Card(Boolean special, Boolean specialX, char colour, int rank){
 
@@ -18,34 +18,34 @@ public class Card {
     }
 
 
-    public Card(Boolean special, Boolean specialX, char colour, String ability){
+    public Card(Boolean special, Boolean specialX, char colour, String actionCard){
 
         this.special = special;
         this.colour = colour;
-        this.ability = ability;
+        this.actionCard = actionCard;
         this.specialX = specialX;
     }
 
-    public Card(Boolean special, Boolean specialX, String abilityX){
+    public Card(Boolean special, Boolean specialX, String wildCard){
 
         this.special = special;
         this.specialX = specialX;
-        this.abilityX = abilityX;
+        this.wildCard = wildCard;
     }
 
     public char getColour(){ return colour;}
 
     public int getRank() { return rank;}
 
-    public Boolean isSpecial(){
+    public Boolean isActionCard(){
         return special;
     }
 
-    public Boolean isSpecialX(){ return specialX;}
+    public Boolean isWildCard(){ return specialX;}
 
-    public String getAbility(){ return ability;}
+    public String getActionCard(){ return actionCard;}
 
-    public String getAbilityX(){ return abilityX;}
+    public String getWildCard(){ return wildCard;}
 
     public void setColour(char colour){this.colour = colour;}
 
@@ -54,11 +54,11 @@ public class Card {
     }
 
     public void showSpecialCard(){
-        System.out.print("[" + this.colour + " " + this.ability + "] ");
+        System.out.print("[" + this.colour + " " + this.actionCard + "] ");
     }
 
     public void showSpecialX(){
-        System.out.print("[" + this.abilityX + "] ");
+        System.out.print("[" + this.wildCard + "] ");
     }
 
 

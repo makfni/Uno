@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface PlayerInterface {
 
-        void playerTurn(ArrayList<Card> table, ArrayList<ArrayList<Card>> playerList );
+        void playerTurn(ArrayList<Card> table, ArrayList<Card> player);
 
         Boolean checkValidity(ArrayList<Card> table, Card card, String play);
 
         void specialEffect(ArrayList<Card> hand, Card card, String special);
 
-        Boolean checkWinner(ArrayList<Card> hand);
+        Boolean checkWinner(int size);
 }

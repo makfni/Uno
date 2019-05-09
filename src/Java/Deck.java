@@ -7,8 +7,8 @@ public class Deck{
 
     private ArrayList<Card> deck;
     private char[] colour = {'B', 'Y', 'R', 'G'};
-    private int[] rank = {0,1,2,3,4,5,6,7,8,9};
-    private String[] abilities = {"Skip turn", "Reverse", "Draw two"};
+    private int[] rank = {1,2,3,4,5,6,7,8,9};
+    private String[] abilities = {"Draw two"};
     private String[] abilityX = {"Change colour", "Draw four"};
 
     //Create deck
@@ -29,7 +29,7 @@ public class Deck{
                     deck.add(card);
                 }
 
-            for (int x = 0; x < 1; x++) {
+            for (int x = 0; x < 2; x++) {
                 for(String abilityX : abilityX){
                     Card card = new Card(false,true,abilityX);
                     deck.add(card);
@@ -37,6 +37,15 @@ public class Deck{
             }
         }
 
+        for(char c : colour){
+            Card card = new Card(false, false, c, 0);
+            deck.add(card);
+        }
+
+        shuffleDeck(deck);
+    }
+
+    public void shuffleDeck(ArrayList<Card> deck){
         Collections.shuffle(deck);
     }
 
@@ -81,11 +90,11 @@ public class Deck{
         System.out.print("{");
         System.out.print(" ");
         for (int i = 0; i < display.size(); i++) {
-            if (!display.get(i).isSpecial() && !display.get(i).isSpecialX()) {
+            if (!display.get(i).isActionCard() && !display.get(i).isWildCard()) {
                 display.get(i).showCard();
-            } else if (display.get(i).isSpecial() && !display.get(i).isSpecialX()) {
+            } else if (display.get(i).isActionCard() && !display.get(i).isWildCard()) {
                 display.get(i).showSpecialCard();
-            } else if (display.get(i).isSpecialX() && !display.get(i).isSpecial()) {
+            } else if (display.get(i).isWildCard() && !display.get(i).isActionCard()) {
                 display.get(i).showSpecialX();
             }
             System.out.print(" ");
