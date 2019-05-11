@@ -6,9 +6,9 @@ public interface PlayerInterface {
 
         void playerTurn(ArrayList<Card> table, ArrayList<Card> player);
 
-        Boolean checkValidity(ArrayList<Card> table, Card card, String play);
+        Boolean checkValidity(ArrayList<Card> table, Card card, String action);
 
-        void specialEffect(ArrayList<Card> hand, Card card, String special);
+        void specialEffect(ArrayList<Card> hand, Card card, String play);
 
         Boolean checkWinner(int size);
 }

@@ -3,7 +3,7 @@ package Java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Uno extends Deck implements PlayerInterface{
+public class Uno extends Deck implements PlayerInterface {
 
     private playerOne p1 = new playerOne();
     private AI bot = new AI();
@@ -28,10 +28,10 @@ public class Uno extends Deck implements PlayerInterface{
         //Starts game off by taking a card on the top of the deck
         //and placing it on the table.
         //First card drawn on the table cannot be a wild card.
-        while(table.isEmpty()) {
-            if (getDeck().get(getDeckNum()-1).isWildCard()) {
+        while (table.isEmpty()) {
+            if (getDeck().get(getDeckNum() - 1).isWildCard()) {
                 shuffleDeck(getDeck());
-            } else if (getDeck().get(getDeckNum()-1).isActionCard()) {
+            } else if (getDeck().get(getDeckNum() - 1).isActionCard()) {
                 table.add(draw());
                 initAction(p1.getPlayerOneHand(), table.get(0));
             } else {
@@ -40,7 +40,7 @@ public class Uno extends Deck implements PlayerInterface{
         }
 
         //Keeps the game going until someone wins or the deck runs out of cards.
-        while(!p1.getPlayerOneHand().isEmpty() && !bot.getAIHand().isEmpty()) {
+        while (!p1.getPlayerOneHand().isEmpty() && !bot.getAIHand().isEmpty()) {
             for (ArrayList<Card> cards : playerList) {
 
                 System.out.println("Deck size: " + deck.getDeckNum() + " \n");
@@ -57,8 +57,8 @@ public class Uno extends Deck implements PlayerInterface{
     }
 
     //p1's playerTurn
-    public void playerTurn(ArrayList<Card> table, ArrayList<Card> player){
-        if(checkWinner(p1.getHandSize())){
+    public void playerTurn(ArrayList<Card> table, ArrayList<Card> player) {
+        if (checkWinner(p1.getHandSize())) {
             System.exit(0);
         }
 
@@ -76,7 +76,7 @@ public class Uno extends Deck implements PlayerInterface{
                 String play = choice.nextLine();
 
                 switch (play.toUpperCase()) {
-                    case "NORMAL":
+                    case "N":
 
                         System.out.println("Which cards would you like to play? ");
                         System.out.println("====================================");
@@ -97,13 +97,14 @@ public class Uno extends Deck implements PlayerInterface{
                                         break;
                                     } else {
                                         System.out.println("Invalid move!");
+                                        playerTurn(table,p1.getPlayerOneHand());
                                     }
                                 }
                             }
                         }
                         return;
 
-                    case "SPECIAL":
+                    case "S":
 
                         System.out.println("Which cards would you like to play? ");
                         System.out.println("====================================");
@@ -122,13 +123,14 @@ public class Uno extends Deck implements PlayerInterface{
                             for (Card c : p1.getPlayerOneHand()) {
                                 if (arrayX.equals(c.getWildCard())) {
                                     specialEffect(bot.getAIHand(), c, "wildCard");
-                                    table.add(0,c);
+                                    table.add(0, c);
                                     p1.getPlayerOneHand().remove(c);
-                                    if(arrayX.equals("Change colour")){
+                                    if (arrayX.equals("Change colour")) {
                                         playerTurn(table, playerList.get(0));
                                         break;
+                                    }else{
+                                        return;
                                     }
-                                    break;
                                 } else if (c.getColour() == colour && actionCard.equals(c.getActionCard())) {
                                     if (checkValidity(table, c, play)) {
                                         table.add(c);
@@ -143,14 +145,16 @@ public class Uno extends Deck implements PlayerInterface{
                             }
                         }
                         return;
+
                     default:
-                        break;
+                        playerTurn(table,p1.getPlayerOneHand());
                 }
-            case 2:
-                p1.getPlayerOneHand().add(deck.draw());
-                deck.display(p1.getPlayerOneHand(), "hand");
-                System.out.println("You drew one card and ended your turn.\n");
-                return;
+
+                case 2:
+                    p1.getPlayerOneHand().add(deck.draw());
+                    deck.display(p1.getPlayerOneHand(), "hand");
+                    System.out.println("You drew one card and ended your turn.\n");
+                    return;
             case 3:
                 System.out.println("Exiting game..");
                 System.exit(0);
@@ -159,6 +163,8 @@ public class Uno extends Deck implements PlayerInterface{
                 break;
         }
     }
+
+
 
     //Depending on whether it's an action or wild card, this method will
     //affect your opponent..or you.
@@ -172,12 +178,12 @@ public class Uno extends Deck implements PlayerInterface{
                     return;
                 case "Draw two":
                     for (int i = 0; i < 2; i++) {
-                       hand.add(deck.draw());
+                        hand.add(deck.draw());
                     }
                     break;
                 default:
                     break;
-                }
+            }
         } else if (special.equals("wildCard")) {
             switch (card.getWildCard()) {
                 case "Change colour":
@@ -205,6 +211,7 @@ public class Uno extends Deck implements PlayerInterface{
             }
         }
     }
+
 
     //Similar to specialEffect() except this method is strictly for
     //initializing the table.
@@ -237,9 +244,9 @@ public class Uno extends Deck implements PlayerInterface{
         int tableRank = table.get(table.size() - 1).getRank();
         String actionCard = table.get(table.size() - 1).getActionCard();
 
-        if (play.equals("normal")) {
+        if (play.equals("n")) {
             return card.getColour() == tableColour || card.getRank() == tableRank;
-        } else if (play.equals("special")) {
+        } else if (play.equals("s")) {
             return card.getColour() == tableColour || card.getActionCard().equals(actionCard);
         }
         return false;
