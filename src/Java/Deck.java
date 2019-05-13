@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck{
-//, 'Y', 'R', 'G'
+    //
     private ArrayList<Card> deck;
-    private char[] colour = {'B'};
+    private char[] colour = {'B', 'Y', 'R', 'G'};
     private int[] rank = {1,2,3,4,5,6,7,8,9};
     private String[] abilities = {"Draw two", "Skip turn", "Reverse"};
     private String[] abilityX = {"Change colour", "Draw four"};

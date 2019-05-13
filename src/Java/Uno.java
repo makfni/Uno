@@ -7,7 +7,7 @@ public class Uno extends Deck implements PlayerInterface {
 
     private playerOne p1 = new playerOne();
     private AI bot = new AI();
-    private Deck deck = new Deck();
+    public Deck deck = new Deck();
     private ArrayList<Card> table = new ArrayList<>();
     private ArrayList<ArrayList<Card>> playerList = new ArrayList<>();
     private Scanner move = new Scanner(System.in);
@@ -53,7 +53,6 @@ public class Uno extends Deck implements PlayerInterface {
                 }
             }
         }
-
     }
 
     //p1's playerTurn
@@ -92,17 +91,18 @@ public class Uno extends Deck implements PlayerInterface {
                             for (Card c : p1.getPlayerOneHand()) {
                                 if (c.getColour() == color && c.getRank() == value) {
                                     if (checkValidity(table, c, play)) {
-                                        table.add(c);
+                                        table.add(0, c);
                                         p1.getPlayerOneHand().remove(c);
                                         break;
                                     } else {
                                         System.out.println("Invalid move!");
-                                        playerTurn(table,p1.getPlayerOneHand());
+                                        break;
                                     }
                                 }
                             }
                         }
                         return;
+
 
                     case "S":
 
@@ -123,9 +123,10 @@ public class Uno extends Deck implements PlayerInterface {
                             for (Card c : p1.getPlayerOneHand()) {
                                 if (arrayX.equals(c.getWildCard())) {
                                     specialEffect(bot.getAIHand(), c, "wildCard");
-                                    table.add(0, c);
+                                    table.add(c);
                                     p1.getPlayerOneHand().remove(c);
                                     if (arrayX.equals("Change colour")) {
+                                        deck.display(table, "table");
                                         playerTurn(table, playerList.get(0));
                                         break;
                                     }else{
@@ -133,13 +134,13 @@ public class Uno extends Deck implements PlayerInterface {
                                     }
                                 } else if (c.getColour() == colour && actionCard.equals(c.getActionCard())) {
                                     if (checkValidity(table, c, play)) {
-                                        table.add(c);
+                                        table.add(0, c);
                                         p1.getPlayerOneHand().remove(c);
                                         specialEffect(bot.getAIHand(), c, "actionCard");
                                         break;
                                     } else {
                                         System.out.println("Invalid move!");
-                                        playerTurn(table, p1.getPlayerOneHand());
+                                        break;
                                     }
                                 }
                             }
@@ -147,14 +148,14 @@ public class Uno extends Deck implements PlayerInterface {
                         return;
 
                     default:
-                        playerTurn(table,p1.getPlayerOneHand());
+                        break;
                 }
 
-                case 2:
-                    p1.getPlayerOneHand().add(deck.draw());
-                    deck.display(p1.getPlayerOneHand(), "hand");
-                    System.out.println("You drew one card and ended your turn.\n");
-                    return;
+            case 2:
+                p1.getPlayerOneHand().add(deck.draw());
+                deck.display(p1.getPlayerOneHand(), "hand");
+                System.out.println("You drew one card and ended your turn.\n");
+                return;
             case 3:
                 System.out.println("Exiting game..");
                 System.exit(0);
@@ -260,6 +261,8 @@ public class Uno extends Deck implements PlayerInterface {
         }
         return false;
     }
+
+    public ArrayList<ArrayList<Card>> getPlayerList() { return playerList; }
 
     public ArrayList<Card> getTable(){
         return table;
