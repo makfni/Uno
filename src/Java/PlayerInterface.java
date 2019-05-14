@@ -10,5 +10,6 @@ public interface PlayerInterface {
 
         void specialEffect(ArrayList<Card> hand, Card card, String special);
 
+
         Boolean checkWinner(int size);
 }
