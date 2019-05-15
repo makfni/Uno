@@ -7,94 +7,130 @@ public class AI extends Deck implements PlayerInterface{
     //private ArrayList<AI> bots = new ArrayList<>();
     public Uno uno;
     public playerOne p1;
-
+    public int count;
+    public int countReverse;
 
     public void playerTurn(ArrayList<Card> table, ArrayList<Card> player) {
         display(AIHand, "AI");
-        for (int i = 0; i < AIHand.size(); i++) {
-            //Check if there is a winner
-            if (checkWinner(AIHand.size())) {
-                System.exit(0);
-            } else {
-                for (Card t : table) {
-                     if (AIHand.get(i).isWildCard()){
-                         System.out.println("drawfour1");
-                         switch (AIHand.get(i).getWildCard()) {
-                             case "Draw four":
-                                 System.out.println("AI made you draw FOUR cards.");
-                                 for (int x = 0; x < 4; x++) {
-                                     p1.getPlayerOneHand().add(draw());
-                                 }
-                                 table.add(AIHand.get(i));
-                                 AIHand.remove(AIHand.get(i));
-                                 break;
-                             case "Change colour":
-                                 for (int j = 0; j < AIHand.size(); j++) {
-                                     if (AIHand.get(i).getColour() == AIHand.get(j).getColour()) {
-                                         uno.getTable().get(0).setColour(AIHand.get(i).getColour());
-                                     }
-                                 }
-                                 table.add(AIHand.get(i));
-                                 AIHand.remove(AIHand.get(i));
-                                 break;
+        int temp = AIHand.size();
+        int tempReverse;
+        //Check if there is a winner
+        if (checkWinner(AIHand.size())) {
+            System.exit(0);
+        } else {
+            for (int i = 0; i < AIHand.size(); i++) {
+                if (AIHand.get(i).isWildCard()) {
+                    switch (AIHand.get(i).getWildCard()) {
+                        case "Draw four":
+                            table.add(AIHand.get(i));
+                            AIHand.remove(AIHand.get(i));
 
-                         }
-                         if(AIHand.get(i).getWildCard().equals("Change colour")){
-                             playerTurn(uno.getTable(), uno.getPlayerList().get(1));
-                         }else{
-                             return;
-                         }
-
-                     } else if (t.getColour() == AIHand.get(i).getColour() && AIHand.get(i).isActionCard()) {
-                         System.out.println("action1");
-                         switch(AIHand.get(i).getActionCard()) {
-                             case "Reverse":
-                                 System.out.println("AI played a Reverse card.");
-                                 table.add(0, AIHand.get(i));
-                                 AIHand.remove(AIHand.get(i));
-                                 return;
-                             case "Skip turn":
-                                 System.out.println("AI skipped your turn.");
-                                 playerTurn(uno.getTable(), uno.getPlayerList().get(1));
-                                 table.add(0, AIHand.get(i));
-                                 AIHand.remove(AIHand.get(i));
-                                 break;
-                             case "Draw two":
-                                 System.out.println("You have to draw two cards.");
-                                 for (int j = 0; j < AIHand.size(); j++) {
-                                     if (AIHand.get(i).getActionCard().equals("Draw two") == AIHand.get(j).getActionCard().equals("Draw two")) {
-                                        
-                                     }
-                                 }
-
-                                 for(int x = 0; x < 2; x++){
-                                     p1.getPlayerOneHand().add(draw());
-                                 }
-                                 table.add(0, AIHand.get(i));
-                                 AIHand.remove(AIHand.get(i));
-                                 break;
-                             default:
-                                 break;
-                         }
-                         return;
-                    } else if (t.getColour() == AIHand.get(i).getColour() && t.getRank() == AIHand.get(i).getRank()) {
-                         for(int j = 0; j < AIHand.size(); j++) {
-                            if(AIHand.get(i).getRank() == AIHand.get(j).getRank()){
-                                System.out.println("multiple of the same rank");
-                                table.add(0, AIHand.get(i));
-                                AIHand.remove(AIHand.get(i));
-                            }else{
-                                System.out.println("one rank");
-                                table.add(0, AIHand.get(i));
-                                AIHand.remove(AIHand.get(i));
-                                break;
+                            for (int j = 0; j < 4; j++) {
+                                player.add(0, draw());
                             }
-                         }
+                            System.out.println("AI made you draw FOUR cards.");
+                            return;
+                        case "Change colour":
+
+                            for (int x = 0; x < AIHand.size(); x++) {
+                                for (int y = 1; y < AIHand.size(); y++) {
+                                    if (AIHand.get(x).getColour() == AIHand.get(y).getColour()) {
+                                        table.add(AIHand.get(x));
+                                        table.get(0).setColour(AIHand.get(x).getColour());
+                                        AIHand.remove(AIHand.get(x));
+                                    }
+                                }
+                            }
+                            System.out.println("Colour have been changed to " + table.get(0).getColour());
+
+                            break;
+
                     }
                 }
             }
+            for (int i = 0; i < AIHand.size(); i++) {
+                if (table.get(0).getColour() == AIHand.get(i).getColour() && AIHand.get(i).isActionCard()) {
+                    System.out.println("action1");
+                    switch (AIHand.get(i).getActionCard()) {
+                        case "Reverse":
+                            //check from even numbers, if num is even then it is AI turn else other player turn
+                            table.add(0, AIHand.get(i));
+                            AIHand.remove(AIHand.get(i));
+                            return;
+//                            for (int j = 0; j < AIHand.size(); j++) {
+//                                if (AIHand.get(j).getActionCard().equals("Reverse")) {
+//                                    table.add(0, AIHand.get(j));
+//                                    AIHand.remove(AIHand.get(j));
+//                                    countReverse++;
+//                                }
+//                            }
+//                            for(int r = 0; r <= countReverse/2; r++){
+//                                tempReverse = countReverse % r;
+//                                if(tempReverse == 0){
+//                                    playerTurn(table, AIHand);
+//                                }else{
+//                                    return;
+//                                }
+//                            }
+
+                        case "Skip turn":
+                            System.out.println("AI skipped your turn.");
+                            table.add(0, AIHand.get(i));
+                            AIHand.remove(AIHand.get(i));
+                            playerTurn(table, AIHand);
+
+                        case "Draw two":
+
+                            for (int j = 0; j < AIHand.size(); j++) {
+                                if (AIHand.get(i).getActionCard().equals(AIHand.get(j).getActionCard())) {
+                                    table.add(0, AIHand.get(j));
+                                    AIHand.remove(AIHand.get(j));
+                                    count++;
+                                }
+                            }
+                            for (int j = 0; j < 2 * count; j++) {
+                                player.add(draw());
+                            }
+                            return;
+
+
+                        default:
+                            break;
+                    }
+                }
+            }
+
+
+            for (int i = 0; i < AIHand.size(); i++) {
+                if (table.get(0).getRank() == AIHand.get(i).getRank()) {
+                    for (int j = 0; j < AIHand.size(); j++) {
+                        if(table.get(0).getRank() == AIHand.get(i).getRank() && !table.get(0).isActionCard()){
+                            System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
+                            table.add(0, AIHand.get(i));
+                            AIHand.remove(AIHand.get(i));
+                        }
+//                        else if (AIHand.get(i).getRank() == AIHand.get(j).getRank()) {
+//                            System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
+//                            table.add(0, AIHand.get(i));
+//                            AIHand.remove(AIHand.get(i));
+//                        }
+                    }
+                    return;
+                }else if(table.get(0).getColour() == AIHand.get(i).getColour() && !AIHand.get(i).isActionCard()) {
+                    System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
+                    table.add(0, AIHand.get(i));
+                    AIHand.remove(AIHand.get(i));
+                }
+            }
+
+
+            if(AIHand.size() == temp){
+                AIHand.add(0, draw());
+                System.out.println("AI had to draw a card from the deck");
+            }
         }
     }
+
 
     public void specialEffect(ArrayList<Card> hand, Card card, String special){
         if (special.equals("actionCard")) {
@@ -138,22 +174,6 @@ public class AI extends Deck implements PlayerInterface{
     }
 
 
-//            else if(c.getActionCard().equals("Draw two")){
-//                    for(int i = 0; i < uno.getTable().size(); i++) {
-//                        if (uno.getTable().get(i).getActionCard().equals("Draw two") && uno.getTable().get(i + 1).getActionCard().equals("Draw two")) {
-//                            for (int j = 0; j < i * 2; j++) {
-//                                hand.add(draw());
-//                            }
-//                        }else{
-//                            for(int j = 0; j < 2; j++){
-//                                hand.add(draw());
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-
-
     //Checks for winner
     public Boolean checkWinner(int size){
         if(size == 0) {
@@ -172,165 +192,3 @@ public class AI extends Deck implements PlayerInterface{
     }
 
 }
-
-//
-//    public void specialEffect(ArrayList<Card> hand, Card card, String special) {
-////        if (special.equals("actionCard")) {
-////            for(Card c : AIHand){
-////                if(c.getActionCard().equals("Reverse")){
-////                    System.out.println("AI reversed the play.");
-////                    return;
-////                }else if(c.getActionCard().equals("Skip turn")){
-////                    System.out.println("AI skipped your turn!");
-////                    playerTurn(uno.getTable(), AIHand);
-////                }else if(c.getActionCard().equals("Draw two")){
-////                    for(int i = 0; i < uno.getTable().size(); i++) {
-////                        if (uno.getTable().get(i).getActionCard().equals("Draw two") && uno.getTable().get(i + 1).getActionCard().equals("Draw two")) {
-////                            for (int j = 0; j < i * 2; j++) {
-////                                hand.add(draw());
-////                            }
-////                        }else{
-////                            for(int j = 0; j < 2; j++){
-////                                hand.add(draw());
-////                            }
-////                        }
-////                    }
-////                }
-////            }
-////        } else if (special.equals("wildCard")) {
-////            for(Card c : AIHand){
-////                if(uno.getTable().get(0).getColour() == c.getColour()){
-////                    for(int i = 0; i < 4; i++){
-////                        hand.add(0, uno.deck.draw());
-////                    }
-////                }else{
-////                    for(int i = 0; i < AIHand.size(); i++){
-////                        for(int j = 0; j < 8; j++){
-////                            if(AIHand.get(i).getRank() == AIHand.get(i+1).getRank()) {
-////                                uno.getTable().get(0).setColour(AIHand.get(i).getColour());
-////                            }
-////                        }
-////                    }
-////                }
-////            }
-////        }
-//    }
-//
-//    //Checks for winner
-//    public Boolean checkWinner(int size){
-//        if(size == 0) {
-//            System.out.println("You win!");
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//
-//    /*
-//
-//    //Depending on whether it's an action or wild card, this method will
-//    //affect your opponent..or you.
-//    public void specialEffect(ArrayList<Card> hand, Card card, String special) {
-//        if (special.equals("actionCard")) {
-//            switch (card.getActionCard()) {
-//                case "Skip turn":
-//                    playerTurn(table, playerList.get(0));
-//                    break;
-//                case "Reverse":
-//                    return;
-//                case "Draw two":
-//                    for (int i = 0; i < 2; i++) {
-//                        hand.add(deck.draw());
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        } else if (special.equals("wildCard")) {
-//            switch (card.getWildCard()) {
-//                case "Change colour":
-//                    System.out.println("What colour would you like?\n");
-//                    String input = colourChange.nextLine();
-//                    char colour = input.charAt(0);
-//
-//                    int i = 0;
-//                    while (i < deck.getColour().length) {
-//                        if (colour == deck.getColour()[i]) {
-//                            table.get(table.size() - 1).setColour(colour);
-//                            break;
-//                        }
-//                        i++;
-//                    }
-//                    break;
-//                case "Draw four":
-//                    for (int j = 0; j < 4; j++) {
-//                        hand.add(deck.draw());
-//                    }
-//                    break;
-//                default:
-//                    break;
-//
-//            }
-//        }
-//    }
-//
-//
-//    //Similar to specialEffect() except this method is strictly for
-//    //initializing the table.
-//    public void initAction(ArrayList<Card> hand, Card card){
-//        switch (card.getActionCard()) {
-//            case "Skip turn":
-//                System.out.println("First card on the table made you skip your turn.\n");
-//                bot.playerTurn(table, playerList.get(1));
-//                break;
-//            case "Reverse":
-//                System.out.println("First card on the table made you Reverse.\n");
-//                bot.playerTurn(table, playerList.get(1));
-//                return;
-//            case "Draw two":
-//                for (int i = 0; i < 2; i++) {
-//                    hand.add(draw());
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//
-//
-//    //This method will check to see if the card you decided to play
-//    //is a valid move according to the card on top of the pile
-//    public Boolean checkValidity(ArrayList<Card> table, Card card, String play) {
-//
-//        char tableColour = table.get(table.size() - 1).getColour();
-//        int tableRank = table.get(table.size() - 1).getRank();
-//        String actionCard = table.get(table.size() - 1).getActionCard();
-//
-//        if (play.equals("n")) {
-//            return card.getColour() == tableColour || card.getRank() == tableRank;
-//        } else if (play.equals("s")) {
-//            return card.getColour() == tableColour || card.getActionCard().equals(actionCard);
-//        }
-//        return false;
-//    }
-//
-//    //Checks for winner
-//    public Boolean checkWinner(int size){
-//        if(size == 0) {
-//            System.out.println("You win!");
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//
-//     */
-//    public ArrayList<Card> getAIHand() {
-//        return AIHand;
-//    }
-//
-//    public int handSize(ArrayList<Card> hand){
-//        return AIHand.size();
-//    }
-//
-//}

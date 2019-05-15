@@ -38,7 +38,8 @@ public class Uno extends Deck implements PlayerInterface {
                 table.add(draw());
             }
         }
-
+        //big change may have been made...must check all case where playerturn is being called and where
+        //the second parameter is used.
         //Keeps the game going until someone wins or the deck runs out of cards.
         while (!p1.getPlayerOneHand().isEmpty() && !bot.getAIHand().isEmpty()) {
             for (ArrayList<Card> cards : playerList) {
@@ -47,9 +48,9 @@ public class Uno extends Deck implements PlayerInterface {
                 deck.display(table, "table");
 
                 if (cards == p1.getPlayerOneHand()) {
-                    playerTurn(table, cards);
+                    playerTurn(table, bot.getAIHand());
                 } else if (cards == bot.getAIHand()) {
-                    bot.playerTurn(table, cards);
+                    bot.playerTurn(table, p1.getPlayerOneHand());
                 }
             }
         }
