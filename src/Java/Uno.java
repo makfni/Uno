@@ -43,7 +43,7 @@ public class Uno extends Deck implements PlayerInterface {
         //Keeps the game going until someone wins or the deck runs out of cards.
         while (!p1.getPlayerOneHand().isEmpty() && !bot.getAIHand().isEmpty()) {
             for (ArrayList<Card> cards : playerList) {
-
+                shuffleDeck(getDeck());
                 System.out.println("Deck size: " + deck.getDeckNum() + " \n");
                 deck.display(table, "table");
 

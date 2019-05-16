@@ -7,7 +7,7 @@ public class AI extends Deck implements PlayerInterface{
     //private ArrayList<AI> bots = new ArrayList<>();
     public Uno uno;
     public playerOne p1;
-    public int count;
+    public int count = 1;
     public int countReverse;
 
     public void playerTurn(ArrayList<Card> table, ArrayList<Card> player) {
@@ -26,18 +26,18 @@ public class AI extends Deck implements PlayerInterface{
                             AIHand.remove(AIHand.get(i));
 
                             for (int j = 0; j < 4; j++) {
-                                player.add(0, draw());
+                                player.add(draw());
                             }
                             System.out.println("AI made you draw FOUR cards.");
                             return;
                         case "Change colour":
 
+                            table.add(AIHand.get(i));
+                            AIHand.remove(AIHand.get(i));
                             for (int x = 0; x < AIHand.size(); x++) {
-                                for (int y = 1; y < AIHand.size(); y++) {
-                                    if (AIHand.get(x).getColour() == AIHand.get(y).getColour()) {
-                                        table.add(AIHand.get(x));
+                                for (Card card : AIHand) {
+                                    if (AIHand.get(x).getColour() == card.getColour()) {
                                         table.get(0).setColour(AIHand.get(x).getColour());
-                                        AIHand.remove(AIHand.get(x));
                                     }
                                 }
                             }
@@ -54,9 +54,11 @@ public class AI extends Deck implements PlayerInterface{
                     switch (AIHand.get(i).getActionCard()) {
                         case "Reverse":
                             //check from even numbers, if num is even then it is AI turn else other player turn
-                            table.add(0, AIHand.get(i));
-                            AIHand.remove(AIHand.get(i));
-                            return;
+                            if(table.get(0).getColour() == AIHand.get(i).getColour() || table.get(0).getActionCard().equals("Reverse")) {
+                                table.add(0, AIHand.get(i));
+                                AIHand.remove(AIHand.get(i));
+                                return;
+                            }
 //                            for (int j = 0; j < AIHand.size(); j++) {
 //                                if (AIHand.get(j).getActionCard().equals("Reverse")) {
 //                                    table.add(0, AIHand.get(j));
@@ -74,62 +76,61 @@ public class AI extends Deck implements PlayerInterface{
 //                            }
 
                         case "Skip turn":
-                            System.out.println("AI skipped your turn.");
-                            table.add(0, AIHand.get(i));
-                            AIHand.remove(AIHand.get(i));
-                            playerTurn(table, AIHand);
-
+                            if(table.get(0).getColour() == AIHand.get(i).getColour() || table.get(0).getActionCard().equals("Skip turn")) {
+                                System.out.println("AI skipped your turn.");
+                                table.add(0, AIHand.get(i));
+                                AIHand.remove(AIHand.get(i));
+                                playerTurn(table, AIHand);
+                            }
                         case "Draw two":
-
-                            for (int j = 0; j < AIHand.size(); j++) {
-                                if (AIHand.get(i).getActionCard().equals(AIHand.get(j).getActionCard())) {
-                                    table.add(0, AIHand.get(j));
-                                    AIHand.remove(AIHand.get(j));
-                                    count++;
+                            if(table.get(0).getColour() == AIHand.get(i).getColour() || table.get(0).getActionCard().equals("Draw two")) {
+                                for (int j = 0; j < AIHand.size(); j++) {
+                                    if (AIHand.get(i).getActionCard().equals(AIHand.get(j).getActionCard())) {
+                                        table.add(0, AIHand.get(j));
+                                        AIHand.remove(AIHand.get(j));
+                                        count++;
+                                    }
                                 }
+                                table.add(0, AIHand.get(i));
+                                AIHand.remove(AIHand.get(i));
+                                for (int j = 0; j < 2 * count; j++) {
+                                    player.add(draw());
+                                }
+                                return;
                             }
-                            for (int j = 0; j < 2 * count; j++) {
-                                player.add(draw());
-                            }
-                            return;
-
-
                         default:
                             break;
                     }
                 }
             }
 
-
-            for (int i = 0; i < AIHand.size(); i++) {
-                if (table.get(0).getRank() == AIHand.get(i).getRank()) {
-                    for (int j = 0; j < AIHand.size(); j++) {
-                        if(table.get(0).getRank() == AIHand.get(i).getRank() && !table.get(0).isActionCard()){
-                            System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
-                            table.add(0, AIHand.get(i));
-                            AIHand.remove(AIHand.get(i));
+            for(int i = 0; i < AIHand.size(); i++) {
+                if (!AIHand.get(i).isActionCard() || !AIHand.get(i).isWildCard()) {
+                    if (table.get(0).getRank() == AIHand.get(i).getRank()) {
+                        table.add(0, AIHand.get(i));
+                        AIHand.remove(AIHand.get(i));
+                        for (int j = 0; j < AIHand.size(); j++) {
+                            if (AIHand.get(i).getRank() == AIHand.get(j).getRank()) {
+                                table.add(0, AIHand.get(j));
+                                AIHand.remove(AIHand.get(j));
+                            }
                         }
-//                        else if (AIHand.get(i).getRank() == AIHand.get(j).getRank()) {
-//                            System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
-//                            table.add(0, AIHand.get(i));
-//                            AIHand.remove(AIHand.get(i));
-//                        }
+
+                    }else if (table.get(0).getColour() == AIHand.get(i).getColour()){
+                        table.add(0, AIHand.get(i));
+                        AIHand.remove(AIHand.get(i));
+                       return;
                     }
-                    return;
-                }else if(table.get(0).getColour() == AIHand.get(i).getColour() && !AIHand.get(i).isActionCard()) {
-                    System.out.println("Played " + AIHand.get(i).getColour() + AIHand.get(i).getRank());
-                    table.add(0, AIHand.get(i));
-                    AIHand.remove(AIHand.get(i));
                 }
             }
 
-
-            if(AIHand.size() == temp){
+            if (AIHand.size() == temp) {
                 AIHand.add(0, draw());
                 System.out.println("AI had to draw a card from the deck");
             }
         }
     }
+
 
 
     public void specialEffect(ArrayList<Card> hand, Card card, String special){

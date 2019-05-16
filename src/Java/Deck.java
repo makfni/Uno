@@ -80,22 +80,26 @@ public class Deck{
 
     public void display(ArrayList<Card> display, String type){
 
-        if(type == "hand") {
-            System.out.println("Your current hand: ");
-        }else if(type == "AI"){
-            System.out.println("AI Hand: ");
-        }else if(type == "table"){
-            System.out.println("Table: ");
+        switch (type) {
+            case "hand":
+                System.out.println("Your current hand: ");
+                break;
+            case "AI":
+                System.out.println("AI Hand: ");
+                break;
+            case "table":
+                System.out.println("Table: ");
+                break;
         }
         System.out.print("{");
         System.out.print(" ");
-        for (int i = 0; i < display.size(); i++) {
-            if (!display.get(i).isActionCard() && !display.get(i).isWildCard()) {
-                display.get(i).showCard();
-            } else if (display.get(i).isActionCard() && !display.get(i).isWildCard()) {
-                display.get(i).showSpecialCard();
-            } else if (display.get(i).isWildCard() && !display.get(i).isActionCard()) {
-                display.get(i).showSpecialX();
+        for (Card card : display) {
+            if (!card.isActionCard() && !card.isWildCard()) {
+                card.showCard();
+            } else if (card.isActionCard() && !card.isWildCard()) {
+                card.showSpecialCard();
+            } else if (card.isWildCard() && !card.isActionCard()) {
+                card.showSpecialX();
             }
             System.out.print(" ");
         }
