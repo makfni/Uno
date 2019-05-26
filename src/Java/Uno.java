@@ -38,13 +38,14 @@ public class Uno extends Deck implements PlayerInterface {
                 table.add(draw());
             }
         }
-        //big change may have been made...must check all case where playerturn is being called and where
+
+        //big change may have been made...must check all case where playerTurn is being called and where
         //the second parameter is used.
         //Keeps the game going until someone wins or the deck runs out of cards.
         while (!p1.getPlayerOneHand().isEmpty() && !bot.getAIHand().isEmpty()) {
             for (ArrayList<Card> cards : playerList) {
                 shuffleDeck(getDeck());
-                System.out.println("Deck size: " + deck.getDeckNum() + " \n");
+                //System.out.println("Deck size: " + deck.getDeckNum() + " \n");
                 deck.display(table, "table");
 
                 if (cards == p1.getPlayerOneHand()) {

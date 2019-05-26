@@ -7,7 +7,8 @@ public class Deck{
     //
     private ArrayList<Card> deck;
     private char[] colour = {'B', 'Y', 'R', 'G'};
-    private int[] rank = {1,2,3,4,5,6,7,8,9};
+    //,6,7,8,9
+    private int[] rank = {1,2,3,4,5};
     private String[] abilities = {"Draw two", "Skip turn", "Reverse"};
     private String[] abilityX = {"Change colour", "Draw four"};
 
