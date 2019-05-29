@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Java/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java/AI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Java/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Java/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Java/PlayerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java/PlayerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Java/Uno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java/Uno.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,11 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Java/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state>
+              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -34,10 +33,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Java/Uno.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+            <state relative-caret-position="386">
+              <caret line="270" column="10" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#10669#10670#0" expanded="true" />
+                <element signature="e#10697#10698#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,10 +56,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Java/Deck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+            <state relative-caret-position="148">
+              <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3685#3686#0" expanded="true" />
+                <element signature="e#3753#3754#0" expanded="true" />
+                <element signature="e#3869#3870#0" expanded="true" />
+                <element signature="e#3926#3927#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Java/PlayerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="170">
+              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -85,12 +90,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Java/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="37" column="45" lean-forward="true" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
+            <state relative-caret-position="369">
+              <caret line="149" column="49" lean-forward="true" selection-start-line="149" selection-start-column="49" selection-end-line="149" selection-end-column="49" />
               <folding>
-                <element signature="e#7997#7998#0" expanded="true" />
-                <element signature="e#7148#7149#0" expanded="true" />
-                <element signature="e#7184#7185#0" expanded="true" />
+                <element signature="e#6685#6686#0" expanded="true" />
+                <element signature="e#6880#6881#0" expanded="true" />
+                <element signature="e#6916#6917#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,21 +134,21 @@
         <option value="$PROJECT_DIR$/src/Card.java" />
         <option value="$PROJECT_DIR$/src/Main/AI.java" />
         <option value="$PROJECT_DIR$/src/Java/Player.java" />
-        <option value="$PROJECT_DIR$/src/Java/Launcher.java" />
         <option value="$PROJECT_DIR$/src/Java/Card.java" />
         <option value="$PROJECT_DIR$/src/Java/playerOne.java" />
+        <option value="$PROJECT_DIR$/src/Java/AI.java" />
         <option value="$PROJECT_DIR$/src/Java/PlayerInterface.java" />
         <option value="$PROJECT_DIR$/src/Java/Uno.java" />
-        <option value="$PROJECT_DIR$/src/Java/AI.java" />
+        <option value="$PROJECT_DIR$/src/Java/Launcher.java" />
         <option value="$PROJECT_DIR$/src/Java/Deck.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="240" />
-    <option name="y" value="127" />
+    <option name="y" value="125" />
     <option name="width" value="1440" />
-    <option name="height" value="774" />
+    <option name="height" value="775" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -161,6 +166,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556309082902" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="C:/Program Files/junit5-r5.2.0" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -169,6 +175,12 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="Java" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -265,12 +277,14 @@
       <workItem from="1558559449459" duration="3191000" />
       <workItem from="1558614719094" duration="3923000" />
       <workItem from="1558635628058" duration="6680000" />
-      <workItem from="1558900104697" duration="5341000" />
+      <workItem from="1558900104697" duration="5751000" />
+      <workItem from="1558992142913" duration="3653000" />
+      <workItem from="1559080219427" duration="10061000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253591000" />
+    <option name="totallyTimeSpent" value="267715000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -283,6 +297,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295129" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.42634562" />
@@ -304,7 +319,7 @@
       <window_info anchor="right" id="Maven" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info active="true" anchor="right" x="0" y="356" width="1540" height="111" id="Run" maximized="true" order="9" visible="true" weight="0.3751678" />
+      <window_info active="true" anchor="right" x="0" y="356" width="1540" height="111" id="Run" maximized="true" order="9" visible="true" weight="0.3637584" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" weight="0.35302013" />
@@ -441,16 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Java/Launcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Java/playerOne.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -460,30 +465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Java/PlayerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Java/AI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="37" column="45" lean-forward="true" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-          <folding>
-            <element signature="e#7997#7998#0" expanded="true" />
-            <element signature="e#7148#7149#0" expanded="true" />
-            <element signature="e#7184#7185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Java/Uno.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -494,12 +477,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Java/Deck.java">
+    <entry file="file://$PROJECT_DIR$/src/Java/Uno.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        <state relative-caret-position="386">
+          <caret line="270" column="10" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#10669#10670#0" expanded="true" />
+            <element signature="e#10697#10698#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Java/AI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="149" column="49" lean-forward="true" selection-start-line="149" selection-start-column="49" selection-end-line="149" selection-end-column="49" />
+          <folding>
+            <element signature="e#6685#6686#0" expanded="true" />
+            <element signature="e#6880#6881#0" expanded="true" />
+            <element signature="e#6916#6917#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Java/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Java/Deck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3685#3686#0" expanded="true" />
+            <element signature="e#3753#3754#0" expanded="true" />
+            <element signature="e#3869#3870#0" expanded="true" />
+            <element signature="e#3926#3927#0" expanded="true" />
           </folding>
         </state>
       </provider>

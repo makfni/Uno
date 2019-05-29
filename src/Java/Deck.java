@@ -52,11 +52,22 @@ public class Deck{
 
     public Card draw(){
 
+        AI bot = new AI();
+        playerOne p1 = new playerOne();
+
         Card card;
         if(getDeckNum() > 0){
             card = deck.get(getDeckNum() - 1);
             deck.remove(card);
             return card;
+        } else {
+            if(bot.getAIHand().size() > p1.getHandSize()){
+                System.out.println("AI won the game :(");
+                System.exit(0);
+            }else{
+                System.out.println("You won the game!");
+                System.exit(0);
+            }
         }
         System.out.println("Java.Deck has run out of card.");
         return null;

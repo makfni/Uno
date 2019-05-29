@@ -16,7 +16,7 @@ public class Uno extends Deck implements PlayerInterface {
     private Scanner colourChange = new Scanner(System.in);
 
     //startGame function to initialize game
-    private void startGame() {
+    public void startGame() {
 
         deck.dealHands(p1.getPlayerOneHand());
         deck.dealHands(bot.getAIHand());
@@ -50,8 +50,10 @@ public class Uno extends Deck implements PlayerInterface {
 
                 if (cards == p1.getPlayerOneHand()) {
                     playerTurn(table, bot.getAIHand());
+                    checkWinner(p1.getHandSize(), "you");
                 } else if (cards == bot.getAIHand()) {
                     bot.playerTurn(table, p1.getPlayerOneHand());
+                    checkWinner(bot.getAIHand().size(), "AI");
                 }
             }
         }
@@ -59,9 +61,6 @@ public class Uno extends Deck implements PlayerInterface {
 
     //p1's playerTurn
     public void playerTurn(ArrayList<Card> table, ArrayList<Card> player) {
-        if (checkWinner(p1.getHandSize())) {
-            System.exit(0);
-        }
 
         deck.display(p1.getPlayerOneHand(), "hand");
         System.out.println("Make your move!\n"
@@ -256,10 +255,19 @@ public class Uno extends Deck implements PlayerInterface {
     }
 
     //Checks for winner
-    public Boolean checkWinner(int size){
+    public Boolean checkWinner(int size, String player){
         if(size == 0) {
-            System.out.println("You win!");
-            return true;
+            switch (player){
+                case "you":
+                    System.out.println("You win!");
+                    return true;
+                case "AI":
+                    System.out.println("AI wins :(");
+                    return true;
+                default:
+                    break;
+            }
+
         }
         return false;
     }
