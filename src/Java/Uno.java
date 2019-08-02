@@ -14,12 +14,15 @@ public class Uno extends Deck implements PlayerInterface {
     private Scanner choice = new Scanner(System.in);
     private Scanner scanner = new Scanner(System.in);
     private Scanner colourChange = new Scanner(System.in);
+    private int drawCount;
 
     //startGame function to initialize game
     public void startGame() {
 
         deck.dealHands(p1.getPlayerOneHand());
         deck.dealHands(bot.getAIHand());
+
+        System.out.println(getDeckNum());
 
         //p1 and bot are index 0 and 1 respectively
         playerList.add(p1.getPlayerOneHand());
@@ -63,6 +66,8 @@ public class Uno extends Deck implements PlayerInterface {
     public void playerTurn(ArrayList<Card> table, ArrayList<Card> player) {
 
         deck.display(p1.getPlayerOneHand(), "hand");
+        int temp = table.size();
+
         System.out.println("Make your move!\n"
                 + "1 - Play cards\n"
                 + "2 - Draw card\n"
@@ -81,10 +86,7 @@ public class Uno extends Deck implements PlayerInterface {
                         System.out.println("Which cards would you like to play? ");
                         System.out.println("====================================");
                         String input = scanner.nextLine();
-                        // input = input.replaceAll("\\[", "").replaceAll("\\]", "");
                         String[] stringArray = input.split(", ");
-
-                        //System.out.println(stringArray[0]);
 
                         for (String s : stringArray) {
                             char color = s.charAt(0);
@@ -111,45 +113,69 @@ public class Uno extends Deck implements PlayerInterface {
                         System.out.println("====================================");
 
                         String inputX = scanner.nextLine();
-                        // input = inputX.replaceAll("\\[", "").replaceAll("\\]", "");
-                        String[] stringArrayX = inputX.split(", ");
 
-                        //System.out.println(stringArrayX[0]);
+                        String[] stringArrayX = inputX.split(", ");
 
                         for (String arrayX : stringArrayX) {
 
-                            char colour = arrayX.charAt(0);
-                            String actionCard = arrayX.substring(2);
-
-                            for (Card c : p1.getPlayerOneHand()) {
-                                if (arrayX.equals(c.getWildCard())) {
-                                    specialEffect(bot.getAIHand(), c, "wildCard");
-                                    table.add(c);
-                                    p1.getPlayerOneHand().remove(c);
-                                    if (arrayX.equals("Change colour")) {
-                                        deck.display(table, "table");
-                                        playerTurn(table, playerList.get(0));
-                                        break;
-                                    }else{
-                                        return;
+                            for (int i = 0; i < p1.getPlayerOneHand().size(); i++) {
+                                if (p1.getPlayerOneHand().get(i).isWildCard()) {
+                                    if (arrayX.equals(p1.getPlayerOneHand().get(i).getWildCard())) {
+                                        specialEffect(player, table, p1.getPlayerOneHand().get(i), "wildCard");
+                                        table.add(p1.getPlayerOneHand().get(i));
+                                        p1.getPlayerOneHand().remove(p1.getPlayerOneHand().get(i));
+                                        if (arrayX.equals("Change colour")) {
+                                            deck.display(table, "table");
+                                            playerTurn(table, playerList.get(0));
+                                            break;
+                                        }
                                     }
-                                } else if (c.getColour() == colour && actionCard.equals(c.getActionCard())) {
-                                    if (checkValidity(table, c, play)) {
-                                        table.add(0, c);
-                                        p1.getPlayerOneHand().remove(c);
-                                        specialEffect(bot.getAIHand(), c, "actionCard");
-                                        break;
-                                    } else {
-                                        System.out.println("Invalid move!");
-                                        break;
+                                }
+                                if (p1.getPlayerOneHand().get(i).isActionCard()) {
+                                    System.out.println("check one");
+                                    if (arrayX.charAt(0) == p1.getPlayerOneHand().get(i).getColour()) {
+                                        System.out.println("Check two");
+                                        if (arrayX.substring(2).equals(p1.getPlayerOneHand().get(i).getActionCard())) {
+                                            System.out.println("Single play");
+                                            if (stringArrayX.length == 1) {
+                                                System.out.println("check size");
+                                                if (checkValidity(table, p1.getPlayerOneHand().get(i), "s")) {
+                                                    System.out.println("single play check");
+                                                    table.add(0, p1.getPlayerOneHand().get(i));
+                                                    specialEffect(player, table, p1.getPlayerOneHand().get(i), "actionCard");
+                                                    p1.getPlayerOneHand().remove(p1.getPlayerOneHand().get(i));
+                                                    break;
+                                                }
+                                            //try implementing 2 forloop to go through the play because this algorithm
+                                                //finds the first card (single) then the second (multi-play) but doesnt'
+                                                //pursue it
+                                                //try 2 checks comparing user input and the card on hand 
+                                            } else if (checkValidity(table, p1.getPlayerOneHand().get(i), "s")) {
+                                                System.out.println("multi-play check");
+                                                table.add(0, p1.getPlayerOneHand().get(i));
+                                                System.out.println("added");
+                                                specialEffect(player, table, p1.getPlayerOneHand().get(i), "actionCard");
+                                                p1.getPlayerOneHand().remove(p1.getPlayerOneHand().get(i));
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
+                      //  drawMessage(temp, drawCount, "AI");
+//                        if (temp < table.size()) {
+//                            for (Card card : table) {
+//                                if (card.isActionCard() && card.getActionCard().equals("Draw two")) {
+//                                    drawCount += 2;
+//                                } else if (card.isWildCard() && card.getWildCard().equals("Draw four")) {
+//                                    drawCount += 4;
+//                                } else {
+//                                    break;
+//                                }
+//                            }
+//                            System.out.println("AI drew " + drawCount + " cards");
+//                        }
                         return;
-
-                    default:
-                        break;
                 }
 
             case 2:
@@ -167,10 +193,9 @@ public class Uno extends Deck implements PlayerInterface {
     }
 
 
-
     //Depending on whether it's an action or wild card, this method will
     //affect your opponent..or you.
-    public void specialEffect(ArrayList<Card> hand, Card card, String special) {
+    private void specialEffect(ArrayList<Card> hand, ArrayList<Card> table, Card card, String special) {
         if (special.equals("actionCard")) {
             switch (card.getActionCard()) {
                 case "Skip turn":
@@ -179,14 +204,16 @@ public class Uno extends Deck implements PlayerInterface {
                 case "Reverse":
                     return;
                 case "Draw two":
-                    for (int i = 0; i < 2; i++) {
+                    for(int i = 0; i < 2; i++){
                         hand.add(deck.draw());
                     }
                     break;
+
                 default:
                     break;
             }
         } else if (special.equals("wildCard")) {
+            System.out.println("2");
             switch (card.getWildCard()) {
                 case "Change colour":
                     System.out.println("What colour would you like?\n");
@@ -196,7 +223,7 @@ public class Uno extends Deck implements PlayerInterface {
                     int i = 0;
                     while (i < deck.getColour().length) {
                         if (colour == deck.getColour()[i]) {
-                            table.get(table.size() - 1).setColour(colour);
+                            table.get(0).setColour(colour);
                             break;
                         }
                         i++;
@@ -217,7 +244,7 @@ public class Uno extends Deck implements PlayerInterface {
 
     //Similar to specialEffect() except this method is strictly for
     //initializing the table.
-    public void initAction(ArrayList<Card> hand, Card card){
+    private void initAction(ArrayList<Card> hand, Card card){
         switch (card.getActionCard()) {
             case "Skip turn":
                 System.out.println("First card on the table made you skip your turn.\n");
@@ -240,22 +267,44 @@ public class Uno extends Deck implements PlayerInterface {
 
     //This method will check to see if the card you decided to play
     //is a valid move according to the card on top of the pile
-    public Boolean checkValidity(ArrayList<Card> table, Card card, String play) {
+    private Boolean checkValidity(ArrayList<Card> table, Card card, String play) {
 
-        char tableColour = table.get(table.size() - 1).getColour();
-        int tableRank = table.get(table.size() - 1).getRank();
-        String actionCard = table.get(table.size() - 1).getActionCard();
-
+        char tableColour = table.get(0).getColour();
+        int tableRank = table.get(0).getRank();
+        String actionCard = table.get(0).getActionCard();
         if (play.equals("n")) {
-            return card.getColour() == tableColour || card.getRank() == tableRank;
+            if (card.getColour() == tableColour && card.getRank() == tableRank) {
+                return true;
+            } return(card.getRank() == tableRank || card.getColour() == tableColour);
+
         } else if (play.equals("s")) {
-            return card.getColour() == tableColour || card.getActionCard().equals(actionCard);
+            if (card.getColour() == tableColour && card.getActionCard().equals(actionCard)) {
+                return true;
+            } else if (card.getColour() != tableColour && card.getActionCard().equals(actionCard)) {
+                return true;
+            } return (card.getColour() == tableColour);
+
         }
         return false;
     }
 
+//    private void drawMessage(int temp, int count, String player){
+//        if (temp < table.size()) {
+//            for (Card card : table) {
+//                if (card.isActionCard() && card.getActionCard().equals("Draw two")) {
+//                    count += 2;
+//                } else if (card.isWildCard() && card.getWildCard().equals("Draw four")) {
+//                    count += 4;
+//                } else {
+//                    break;
+//                }
+//            }
+//            System.out.println(player + " drew " + count + " cards");
+//        }
+//    }
+
     //Checks for winner
-    public Boolean checkWinner(int size, String player){
+    private Boolean checkWinner(int size, String player){
         if(size == 0) {
             switch (player){
                 case "you":
